@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
     margin: '10px auto',
     background: 'white',
     borderRadius: '10px',
+    height: '250px',
   }
 }));
 
@@ -78,7 +79,7 @@ export default function CreditCardForm() {
         <form className={classes.root} noValidate autoComplete="off">
             <FormControl className={classes.formControl}>
                 <TextField type="number" onChange={handleCardNumberChange} value={number} id="standard-basic" label="Card Number" /><br/>
-                <TextField type="text" onChange={handleCardNameChange} value={name} id="standard-basic" label="Card Holder" /><br/>
+                <TextField type="text" onChange={handleCardNameChange} value={name} id="standard-basic" label="Card Name" /><br/>
             </FormControl><br/>
             <FormControl className={classes.formControl}>
                 <InputLabel id="month-label">MM</InputLabel>
