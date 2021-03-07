@@ -1,5 +1,5 @@
 import React from 'react';
-import CreditCardForm from './CreditCardForm';
+import CreditCardForm from './components/CreditCardForm';
 
 
 function App() {

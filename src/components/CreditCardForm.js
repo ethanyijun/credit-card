@@ -7,7 +7,7 @@ import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
 import CreditCardComponent from './CreditCardComponent'
-import CreditCardBack from './CreditCardBack'
+import CreditCardBackComponent from './CreditCardBackComponent'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -67,7 +67,7 @@ export default function CreditCardForm() {
   return (
     <Container className="form-container" maxWidth="sm">
       {cvv? (
-      <CreditCardBack cvv={cvv} />
+      <CreditCardBackComponent cvv={cvv} />
       ):(
         <CreditCardComponent type="MASTERCARD"
         name={name}
