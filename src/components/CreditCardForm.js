@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { Container, TextField, makeStyles, InputLabel, MenuItem, FormControl, Select } from '@material-ui/core';
+import { Container, TextField, makeStyles, InputLabel, MenuItem, FormControl, Select, Button } from '@material-ui/core';
 import Message from './Message'
 import CreditCardBackComponent from './CreditCardBackComponent'
 import CreditCardComponent from './CreditCardComponent'
@@ -30,11 +30,35 @@ export default function CreditCardForm() {
   const [number, setNumber] = useState('');
   const [name, setName] = useState('');
   const [cvv, setCVV] = useState('');
+  const [numberError, setNumberError] = useState('');
+  const [cvvError, setCVVError] = useState('');
   const [editFront, setEditFront] = useState(true);
 
   const handleChangeMonth = (event) => {
     setMonth(event.target.value);
     setEditFront(true);
+  };
+
+  useEffect(()=>{
+    if (number.toString().length === 16) {
+      setNumberError('');     
+    } 
+    if(cvv.toString().length  === 3) {
+      setCVVError('');    
+    } 
+  },[number, cvv])
+
+  const handleSubmit = () => {
+    if (number.toString().length < 16) {
+      setNumberError('Number length is less than 16!'); 
+    } else {
+      setNumberError(''); 
+    }
+    if(cvv.toString().length <3) {
+      setCVVError('CVV length is less than 3!'); 
+    } else {
+      setCVVError(''); 
+    }
   };
 
   const handleChangeYear = (event) => {
@@ -43,6 +67,9 @@ export default function CreditCardForm() {
   };
 
   const handleCardNumberChange = (event) => {
+    if (event.target.value.toString().length > 16) {
+      return
+    }
     setNumber(event.target.value);
     setEditFront(true);
   };
@@ -53,10 +80,12 @@ export default function CreditCardForm() {
   };
 
   const handleCVVChange = (event) => {
+    if (event.target.value.toString().length > 3) {
+      return
+    }
     setCVV(event.target.value);
     setEditFront(false);
   };
-
 
   const yearOptions = [];
   const currentYear = new Date().getFullYear();
@@ -66,6 +95,8 @@ export default function CreditCardForm() {
 
   return (
     <Container className="form-container" maxWidth="sm">
+      {numberError && <Message >{numberError}</Message>}
+      {cvvError && <Message >{cvvError}</Message>}
       {!editFront? (
       <CreditCardBackComponent cvv={cvv} />
       ):(
@@ -117,6 +148,7 @@ export default function CreditCardForm() {
             <FormControl className={classes.formControl}>
                 <TextField type="text" onChange={handleCVVChange} value={cvv} id="standard-basic" label="CVV" /><br/>
             </FormControl>
+            <Button onClick={() => handleSubmit()} variant="contained">Submit</Button>
         </form>
     </Container>
   );
