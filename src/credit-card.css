@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css?family=Fjalla+One');
+
+.credit-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: auto;
+
+    width: 400px;
+    height: 250px;
+    padding: 25px;
+    border-radius: 15px;
+
+    color: white;
+
+    background-image: linear-gradient(25deg, #333333, #595959);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.credit-card.back {
+    padding: 25px 0;
+    width: 450px;
+    justify-content: start;
+}
+
+.black-bar{
+    background: black;
+    width: 100%;
+    height: 55px;
+    margin-top: 20px;
+}
+
+.credit-card__number {
+    display: flex;
+    justify-content: center;
+
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 45px;
+}
+
+.credit-card__info {
+    display: flex;
+    justify-content: space-between;
+
+    font-family: 'Fjalla One', sans-serif;
+    font-size: 25px;
+}
+
+.credit-card__info_label {
+    font-size: 14px;
+}
+
+.white-wrapper .credit-card__info_label {
+    font-size: 15px;
+    padding: 3px;
+}
+
+.credit-card__info_expiry {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.white-wrapper {
+    padding: 25px 16px;
+}
+
+.credit-card__info_cvv {
+    text-align: right;
+}
+
+.credit-card__info_value {
+    background: white;
+    color: black;
+    height: 40px;
+    font-size: 30px;
+}
+
+body {
+    background: lightskyblue;
+}
