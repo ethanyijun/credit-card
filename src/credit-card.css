@@ -5,7 +5,8 @@
     flex-direction: column;
     justify-content: space-between;
     margin: auto;
-
+    position: relative;
+    margin-bottom: -145px;
     width: 400px;
     height: 250px;
     padding: 25px;
