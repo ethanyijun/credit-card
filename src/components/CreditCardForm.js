@@ -52,12 +52,13 @@ export default function CreditCardForm() {
     if (number.toString().length < 16) {
       setNumberError('Number length is less than 16!'); 
     } else {
-      setNumberError(''); 
+      setNumberError('');
     }
     if(cvv.toString().length <3) {
       setCVVError('CVV length is less than 3!'); 
     } else {
       setCVVError(''); 
+      setEditFront(true);
     }
   };
 
