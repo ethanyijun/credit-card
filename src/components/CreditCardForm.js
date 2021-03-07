@@ -103,6 +103,9 @@ export default function CreditCardForm() {
   };
 
   const handleCardNameChange = (event) => {
+    if (event.target.value.toString().length > 30) {
+      return
+    }
     setName(event.target.value);
     setEditFront(true);
   };
