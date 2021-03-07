@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     width: 'auto',
-    padding: '175px 25px 25px 25px',
+    padding: '175px 25px 50px 25px',
     margin: '10px auto',
     background: 'white',
     borderRadius: '10px',
@@ -30,6 +30,9 @@ export default function CreditCardForm() {
   const [number, setNumber] = useState('');
   const [name, setName] = useState('');
   const [cvv, setCVV] = useState('');
+  const [monthError, setMonthrror] = useState('');
+  const [yearError, setYearError] = useState('');
+  const [nameError, setNameError] = useState('');
   const [numberError, setNumberError] = useState('');
   const [cvvError, setCVVError] = useState('');
   const [editFront, setEditFront] = useState(true);
@@ -46,7 +49,16 @@ export default function CreditCardForm() {
     if(cvv.toString().length  === 3) {
       setCVVError('');    
     } 
-  },[number, cvv])
+    if(name.length > 0) {
+      setNameError(''); 
+    } 
+    if(month.length > 0) {
+      setMonthrror(''); 
+    } 
+    if(year.length > 0) {
+      setYearError(''); 
+    } 
+  },[number, cvv, month, year, name])
 
   const handleSubmit = () => {
     if (number.toString().length < 16) {
@@ -54,11 +66,26 @@ export default function CreditCardForm() {
     } else {
       setNumberError('');
     }
-    if(cvv.toString().length <3) {
+    if(cvv.toString().length < 3) {
       setCVVError('CVV length is less than 3!'); 
     } else {
       setCVVError(''); 
       setEditFront(true);
+    }
+    if(name.length == 0) {
+      setNameError('Name cannot be empty!'); 
+    } else {
+      setNameError(''); 
+    }
+    if(month.length == 0) {
+      setMonthrror('Month cannot be empty!'); 
+    } else {
+      setMonthrror(''); 
+    }
+    if(year.length == 0) {
+      setYearError('Year cannot be empty!'); 
+    } else {
+      setYearError(''); 
     }
   };
 
@@ -98,6 +125,9 @@ export default function CreditCardForm() {
     <Container className="form-container" maxWidth="sm">
       {numberError && <Message >{numberError}</Message>}
       {cvvError && <Message >{cvvError}</Message>}
+      {monthError && <Message >{monthError}</Message>}
+      {yearError && <Message >{yearError}</Message>}
+      {nameError && <Message >{nameError}</Message>}
       {!editFront? (
       <CreditCardBackComponent cvv={cvv} />
       ):(
