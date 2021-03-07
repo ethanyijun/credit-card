@@ -36,25 +36,31 @@ export default function CreditCardForm() {
   const [number, setNumber] = useState('');
   const [name, setName] = useState('');
   const [cvv, setCVV] = useState('');
+  const [editFront, setEditFront] = useState(true);
 
   const handleChangeMonth = (event) => {
     setMonth(event.target.value);
+    setEditFront(true);
   };
 
   const handleChangeYear = (event) => {
     setYear(event.target.value);
+    setEditFront(true);
   };
 
   const handleCardNumberChange = (event) => {
     setNumber(event.target.value);
+    setEditFront(true);
   };
 
   const handleCardNameChange = (event) => {
     setName(event.target.value);
+    setEditFront(true);
   };
 
   const handleCVVChange = (event) => {
     setCVV(event.target.value);
+    setEditFront(false);
   };
 
 
@@ -66,7 +72,7 @@ export default function CreditCardForm() {
 
   return (
     <Container className="form-container" maxWidth="sm">
-      {cvv? (
+      {!editFront? (
       <CreditCardBackComponent cvv={cvv} />
       ):(
         <CreditCardComponent type="MASTERCARD"
