@@ -55,7 +55,7 @@ export default function CreditCardForm() {
         setCVVError('Not valid CVV'); 
       }
     } else if (visaCardRegex.test(number)) {
-      setCardLogo("visaLogo");
+      setCardLogo("visaCardLogo");
       if(cvv.toString().length === 3) {
         setCVVError('');    
       } else {
@@ -64,8 +64,9 @@ export default function CreditCardForm() {
     }
     else if (cvv.toString().length === 4){
       setCVVError('');    
+      setCardLogo("");
     } else {
-      setCVVError('Not valid CVV'); 
+      setCardLogo("");
     }
 
     if (number.toString().length === 16) {
