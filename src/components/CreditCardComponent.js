@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import '../credit-card.css';
-import visaLogo from '../img/visa.jpg';
+import visaCardLogo from '../img/visa.jpg';
 import masterCardLogo from '../img/master.jpg';
 
 const CreditCardComponent = (props) => {
@@ -8,9 +8,15 @@ const CreditCardComponent = (props) => {
     const [cardNumber, setCardNumber] = useState('');
 
     useEffect (()=>{
-        const masterCardRegex = /^5[1-5][0-9]{14}$/;
-        const visaCardRegex = /^4[0-9]{12}(?:[0-9]{3})?$/;
-        setCardLogo(masterCardRegex.test(props.number)? masterCardLogo : visaCardRegex.test(props.number)? visaLogo : "");
+        if(props.cardLogo == "masterCardLogo"){
+            setCardLogo(masterCardLogo);
+        }
+        if(props.cardLogo == "visaCardLogo"){
+            setCardLogo(visaCardLogo);
+        }
+        if(props.cardLogo == ""){
+            setCardLogo("");
+        }
         const number = props.number.toString();
         if(number.length > 4) {
             setCardNumber(number.substring(0, 4) + " " + number.substring(4, number.length));
@@ -23,7 +29,7 @@ const CreditCardComponent = (props) => {
         if(number.length > 12) {
             setCardNumber(number.substring(0, 4) + " " + number.substring(4, 8) + " " + number.substring(8, 12) + " " + number.substring(12, number.length));
         }
-    }, [props.number]);
+    }, [props.number, props.cardLogo]);
     
     return (
         <div className='credit-card'>
