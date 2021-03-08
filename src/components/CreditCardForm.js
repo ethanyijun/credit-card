@@ -36,6 +36,7 @@ export default function CreditCardForm() {
   const [numberError, setNumberError] = useState('');
   const [cvvError, setCVVError] = useState('');
   const [editFront, setEditFront] = useState(true);
+  const [cardLogo, setCardLogo] = useState('');
 
   const handleChangeMonth = (event) => {
     setMonth(event.target.value);
@@ -43,12 +44,34 @@ export default function CreditCardForm() {
   };
 
   useEffect(()=>{
+
+    const masterCardRegex = /^5[1-5][0-9]{14}$/;
+    const visaCardRegex = /^4[0-9]{12}(?:[0-9]{3})?$/;
+    if(masterCardRegex.test(number)) {
+      setCardLogo("masterCardLogo");
+      if(cvv.toString().length === 3) {
+        setCVVError('');    
+      } else {
+        setCVVError('Not valid CVV'); 
+      }
+    } else if (visaCardRegex.test(number)) {
+      setCardLogo("visaLogo");
+      if(cvv.toString().length === 3) {
+        setCVVError('');    
+      } else {
+        setCVVError('Not valid CVV'); 
+      }
+    }
+    else if (cvv.toString().length === 4){
+      setCVVError('');    
+    } else {
+      setCVVError('Not valid CVV'); 
+    }
+
     if (number.toString().length === 16) {
       setNumberError('');     
     } 
-    if(cvv.toString().length  === 3) {
-      setCVVError('');    
-    } 
+
     if(name.length > 0) {
       setNameError(''); 
     } 
@@ -111,7 +134,7 @@ export default function CreditCardForm() {
   };
 
   const handleCVVChange = (event) => {
-    if (event.target.value.toString().length > 3) {
+    if (event.target.value.toString().length > 4) {
       return
     }
     setCVV(event.target.value);
@@ -134,11 +157,12 @@ export default function CreditCardForm() {
       {!editFront? (
       <CreditCardBackComponent cvv={cvv} />
       ):(
-        <CreditCardComponent type="MASTERCARD"
+        <CreditCardComponent
         name={name}
         number={number}
         month={month}
-        year = {year}/>
+        year = {year}
+        cardLogo={cardLogo}/>
       )
       }
         <form className={classes.root} noValidate autoComplete="off">
