@@ -30,7 +30,7 @@ export default function CreditCardForm() {
   const [number, setNumber] = useState('');
   const [name, setName] = useState('');
   const [cvv, setCVV] = useState('');
-  const [monthError, setMonthrror] = useState('');
+  const [monthError, setMonthError] = useState('');
   const [yearError, setYearError] = useState('');
   const [nameError, setNameError] = useState('');
   const [numberError, setNumberError] = useState('');
@@ -52,10 +52,10 @@ export default function CreditCardForm() {
     if(name.length > 0) {
       setNameError(''); 
     } 
-    if(month.length > 0) {
-      setMonthrror(''); 
+    if(month !== '') {
+      setMonthError(''); 
     } 
-    if(year.length > 0) {
+    if(year !== '') {
       setYearError(''); 
     } 
   },[number, cvv, month, year, name])
@@ -72,17 +72,17 @@ export default function CreditCardForm() {
       setCVVError(''); 
       setEditFront(true);
     }
-    if(name.length == 0) {
+    if(name.length === 0) {
       setNameError('Name cannot be empty!'); 
     } else {
       setNameError(''); 
     }
-    if(month.length == 0) {
-      setMonthrror('Month cannot be empty!'); 
+    if(month.length === 0) {
+      setMonthError('Month cannot be empty!'); 
     } else {
-      setMonthrror(''); 
+      setMonthError(''); 
     }
-    if(year.length == 0) {
+    if(year.length === 0) {
       setYearError('Year cannot be empty!'); 
     } else {
       setYearError(''); 
@@ -180,7 +180,7 @@ export default function CreditCardForm() {
                 </Select>
             </FormControl>
             <FormControl className={classes.formControl}>
-                <TextField type="text" onChange={handleCVVChange} value={cvv} id="standard-basic" label="CVV" /><br/>
+                <TextField type="number" onChange={handleCVVChange} value={cvv} id="standard-basic" label="CVV" /><br/>
             </FormControl>
             <Button onClick={() => handleSubmit()} variant="contained">Submit</Button>
         </form>
